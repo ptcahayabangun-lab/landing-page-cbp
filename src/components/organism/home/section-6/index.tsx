@@ -94,7 +94,6 @@ export const ContactUs = () => {
         <motion.div className="flex flex-col gap-3 my-auto">
           <div className="w-full h-fit rounded-xl overflow-hidden">
             <Maps
-              className="!h-[25rem]"
               // eslint-disable-next-line
               // @ts-ignore
               popUpText={
