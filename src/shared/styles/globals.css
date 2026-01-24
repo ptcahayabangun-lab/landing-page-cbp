@@ -1,30 +1,297 @@
 @import "./tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* PT. Cahaya Bangun Perkasa Brand Colors */
+    --background: 210 20% 98%;
+    --foreground: 235 60% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 235 60% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 235 60% 20%;
+
+    /* Deep Navy Blue from logo */
+    --primary: 238 50% 33%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 238 50% 33%;
+
+    --muted: 210 15% 92%;
+    --muted-foreground: 220 10% 45%;
+
+    /* Vibrant Red accent from logo */
+    --accent: 355 78% 56%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* WhatsApp green */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 220 13% 88%;
+    --input: 220 13% 88%;
+    --ring: 238 50% 33%;
+
+    --radius: 0.625rem;
+
+    /* Custom shadows */
+    --shadow-card: 0 4px 20px -4px hsla(238, 50%, 33%, 0.12);
+    --shadow-elevated: 0 12px 40px -8px hsla(238, 50%, 33%, 0.18);
+    --shadow-float: 0 20px 60px -12px hsla(238, 50%, 33%, 0.25);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 235 35% 8%;
+    --foreground: 210 20% 98%;
+
+    --card: 235 30% 12%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 235 30% 12%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 238 50% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 235 25% 18%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 235 20% 20%;
+    --muted-foreground: 220 15% 65%;
+
+    --accent: 355 78% 56%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 235 20% 22%;
+    --input: 235 20% 22%;
+    --ring: 238 50% 55%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 }
 
-html,
-body {
-  @apply font-regular bg-white text-black;
+@layer components {
+  .box-shadow {
+    box-shadow: var(--shadow-card);
+  }
 
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  .box-shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .box-shadow-float {
+    box-shadow: var(--shadow-float);
+  }
+
+  .text-gradient {
+    background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+  }
+  .btn-primary:hover {
+    background: hsl(var(--primary) / 0.9);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: scale(0.98);
+  }
+
+  .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+  }
+  .btn-accent:hover {
+    background: hsl(var(--accent) / 0.9);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: scale(0.98);
+  }
+
+  .btn-success {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: hsl(var(--success));
+    color: hsl(var(--success-foreground));
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+  }
+  .btn-success:hover {
+    background: hsl(var(--success) / 0.9);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: scale(0.98);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid hsl(var(--primary));
+    color: hsl(var(--primary));
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    transform: scale(0.98);
+  }
+
+  .card-product {
+    background: hsl(var(--card));
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s;
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+  .card-product:hover {
+    box-shadow: var(--shadow-elevated);
+    transform: translateY(-0.25rem);
+  }
+
+  .gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, hsl(var(--primary) / 0.95), hsl(var(--primary) / 0.85), hsl(var(--primary) / 0.7));
+  }
+
+  .floating-action {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.5s ease-out forwards;
+  }
+
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .scroll-container {
@@ -35,4 +302,8 @@ body {
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+button {
+  @apply cursor-pointer
 }

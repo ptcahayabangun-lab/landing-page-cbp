@@ -28,9 +28,9 @@ const skeleton = `data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`;
 
 export const Image: FC<ImageCompProps & ImageProps> = ({
   alt,
-  height,
+  height = 475,
   src,
-  width,
+  width = 700,
   onClick,
   placeholder = "blur",
   className,

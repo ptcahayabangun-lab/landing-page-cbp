@@ -1,180 +1,137 @@
-"use client";
+'use client'
 
-import { Button, InputText } from "@/components/atoms";
-import { ArrowLeft } from "lucide-react";
-import Image from "next/image";
+import { Image } from "@/components/atoms";
+import { FloatingContact, Footer, Navbar } from "@/components/templates";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { fumiraProducts, productCategories } from "public/assets/data/products";
 import { useState } from "react";
 
-const categories = [
-  "Semua",
-  "Atap",
-  "Bata & Beton",
-  "Semen",
-  "Keramik",
-  "Cat & Pelapis",
-  "Pipa & Saluran",
-  "Pintu & Jendela",
-  "Lainnya",
-];
+// Import all product images
+import bl600Img from "public/assets/images/product/fumira/bl-600.png";
+import bl710Img from "public/assets/images/product/fumira/bl-710.png";
+import click330Img from "public/assets/images/product/fumira/click-330.png";
+import colorcoatImg from "public/assets/images/product/fumira/colorcoat.png";
+import compodeckImg from "public/assets/images/product/fumira/compodeck.png";
+import fumiraGripImg from "public/assets/images/product/fumira/fumiragrip-advantages.png";
+import fumiraspanImg from "public/assets/images/product/fumira/fumiraspan.png";
+import gp550Img from "public/assets/images/product/fumira/gp-550.png";
+import sf650Img from "public/assets/images/product/fumira/sf-650.png";
+import sf750Img from "public/assets/images/product/fumira/sf-750.png";
 
-const products = Array.from({ length: 12 }, (_, i) => ({
-  id: i + 1,
-  name: "Genteng Beton Premium",
-  category: "Atap",
-  image: "/assets/images/product-example.jpg",
-  price: "Rp 15.000 / pcs",
-}));
+const imageMap: Record<string, string> = {
+  "fumiragrip-advantages": fumiraGripImg,
+  "colorcoat": colorcoatImg,
+  "compodeck": compodeckImg,
+  "click-330": click330Img,
+  "bl-600": bl600Img,
+  "sf-650": sf650Img,
+  "sf-750": sf750Img,
+  "gp-550": gp550Img,
+  "bl-710": bl710Img,
+  "fumiraspan": fumiraspanImg,
+};
 
 export const ProductListView = () => {
-  const [activeCategory, setActiveCategory] = useState("Semua");
-  const [query, setQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<string>("Semua" as const);
 
-  const filteredProducts = products.filter((product) => {
-    const matchesCategory =
-      activeCategory === "Semua" || product.category === activeCategory;
-    const matchesQuery = product.name
-      .toLowerCase()
-      .includes(query.toLowerCase());
-    return matchesCategory && matchesQuery;
-  });
+  const filteredProducts = activeCategory === "Semua"
+    ? fumiraProducts
+    : fumiraProducts.filter(p => p.category === activeCategory);
 
   return (
-    <div className="w-full">
-      <section className="relative bg-cover bg-no-repeat bg-center h-72 md:h-96 flex items-end justify-center text-center bg-[url('/assets/images/product/building-man-woman.jpg')]">
-        <Link href="/" replace>
-          <ArrowLeft className="absolute top-8 left-8 size-8 text-white bg-gray-800/50 rounded-full p-1 hover:bg-gray-800 transition-all duration-200" />
-        </Link>
-        <div className="px-4 w-full bg-gradient-to-b from-transparent pt-12 to-black text-white">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">
-            Bangun Masa Depan dengan Material Terbaik
-          </h1>
-          <p className="mb-6 text-gray-300">
-            Temukan berbagai pilihan material bangunan berkualitas tinggi untuk
-            proyek Anda.
-          </p>
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      
+      {/* Hero Section */}
+      <section className="pt-32 pb-16 bg-gradient-to-b from-primary-default/5 to-background">
+        <div className="section-container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <h1 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4">
+              Produk <span className="text-primary-default">FUMIRA</span>
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Leading Innovation of Galvanized Steel - Produk baja galvanis berkualitas tinggi 
+              dengan teknologi Jepang untuk berbagai kebutuhan konstruksi Anda
+            </p>
+          </motion.div>
         </div>
       </section>
-      <div className="bg-red-200">ADA</div>
-      <section className="max-w-7xl mx-auto px-4 md:px-8 py-12 grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8">
-        <aside className="space-y-2">
-          <h2 className="font-semibold text-gray-700 dark:text-gray-200 mb-2">
-            Kategori Produk
-          </h2>
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`block w-full text-left px-3 py-2 rounded-md text-sm font-medium ${
-                activeCategory === cat
-                  ? "bg-primary text-white"
-                  : "hover:bg-gray-100 dark:hover:bg-gray-800"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </aside>
 
-        {/* Produk */}
-        <div>
-          <InputText
-            placeholder={`Cari di kategori ${activeCategory}`}
-            className="mb-6"
-            value={query}
-            setValue={setQuery}
-            type="text"
-          />
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {filteredProducts.map((product) => (
-              <div
-                key={product.id}
-                className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shadow hover:shadow-md transition"
+      {/* Category Filter */}
+      <section className="py-8 sticky top-20 z-30 bg-background/95 backdrop-blur-md border-b border-gray-100 shadow">
+        <div className="section-container">
+          <div className="flex flex-wrap gap-2 justify-center">
+            {productCategories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`px-4 py-2 rounded-full font-medium transition-all duration-200 ${
+                  activeCategory === category
+                    ? "bg-primary-default text-white"
+                    : "bg-gray-200 text-primary-default/70 hover:bg-gray-200/80"
+                }`}
               >
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={300}
-                  height={200}
-                  className="w-full h-36 object-cover"
-                />
-                <div className="p-3 space-y-1">
-                  <h3 className="text-sm font-semibold text-gray-800 dark:text-white">
-                    {product.name}
-                  </h3>
-                  <p className="text-xs text-gray-500">{product.category}</p>
-                  <p className="text-orange-500 font-semibold text-sm">
-                    {product.price}
-                  </p>
-                </div>
-              </div>
+                {category}
+              </button>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="text-center mt-8">
-            <Button
-              label="Lihat Semua Produk"
-              type="primary"
-              className="px-6 py-2"
-            />
+      {/* Products Grid */}
+      <section className="py-16">
+        <div className="section-container">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProducts.map((product, index) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Link
+                  href={`/product/${product.id}`}
+                  className="group block bg-card rounded-2xl overflow-hidden box-shadow hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="aspect-[4/3] overflow-hidden bg-muted">
+                    <Image
+                      src={imageMap[product.image]}
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <span className="inline-block px-3 py-1 bg-primary-default/10 text-primary-default text-xs font-semibold rounded-full mb-3">
+                      {product.category}
+                    </span>
+                    <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary-default transition-colors">
+                      {product.name}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                      {product.tagline}
+                    </p>
+                    <div className="flex items-center text-primary-default font-medium text-sm">
+                      Lihat Detail
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Benefit Section */}
-      <section className="bg-gray-50 dark:bg-gray-900 py-12">
-        <div className="max-w-5xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">
-            Kenapa Belanja di Cahaya Bangun Perkasa?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6 text-left">
-            <div>
-              <h3 className="font-semibold text-orange-500 mb-2">
-                Produk Berkualitas
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Kami hanya menyediakan material bangunan yang sudah teruji
-                kualitasnya.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-orange-500 mb-2">
-                Harga Kompetitif
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Harga yang sesuai dengan kualitas dan kebutuhan proyek Anda.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-orange-500 mb-2">
-                Pengiriman Cepat
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Layanan pengiriman tepat waktu ke seluruh wilayah Indonesia.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-orange-500 mb-2">
-                Dukungan Konsultasi
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Tim kami siap membantu Anda memilih produk sesuai kebutuhan
-                proyek.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Bottom */}
-      <section className="bg-primary text-white py-8 text-center">
-        <h2 className="text-2xl font-bold mb-2">Butuh Penawaran Khusus?</h2>
-        <p className="mb-4">
-          Hubungi tim kami untuk mendapatkan harga terbaik.
-        </p>
-        <Button label="Hubungi Kami" type="secondary" className="px-6 py-2" />
-      </section>
+      <Footer />
+      <FloatingContact />
     </div>
   );
 };
+

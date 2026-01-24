@@ -44,3 +44,5 @@ next-env.d.ts
 # firebase
 /firebase-debug.log
 /public/firebase-messaging-sw.js
+
+.vscode
