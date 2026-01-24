@@ -5,6 +5,7 @@ const nextConfig = {
     domains: [],
   },
   staticPageGenerationTimeout: 1000,
+  turbopack: {},
   env: {
     BASE_URL: process.env.BASE_URL,
     TITLE: process.env.TITLE,
