@@ -203,7 +203,7 @@ export const ArticleDetailView = () => {
             className="mb-8"
           >
             <button
-              onClick={() => navigate("/artikel")}
+              onClick={() => navigate("/article")}
               className="inline-flex items-center gap-2 text-gray-800 hover:text-primary-default transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
