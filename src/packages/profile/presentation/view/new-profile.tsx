@@ -3,7 +3,6 @@
 import { Image } from "@/components/atoms";
 import { ContactModal } from "@/components/templates/contact-modal";
 import { FloatingContact } from "@/components/templates/floating-contact";
-import { Footer } from "@/components/templates/footer";
 import { Navbar } from "@/components/templates/navbar";
 import { motion } from "framer-motion";
 import {
@@ -496,7 +495,6 @@ export const NewProfileView = () => {
         </div>
       </section>
 
-      <Footer />
       <FloatingContact />
       <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
     </div>

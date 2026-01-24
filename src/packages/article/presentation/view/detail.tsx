@@ -1,7 +1,7 @@
 'use client'
 
 import { Image } from "@/components/atoms";
-import { FloatingContact, Footer, Navbar } from "@/components/templates";
+import { FloatingContact, Navbar } from "@/components/templates";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Calendar, Clock, Share2, User } from "lucide-react";
 import Link from "next/link";
@@ -41,7 +41,6 @@ export const ArticleDetailView = () => {
             </Link>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -339,7 +338,6 @@ export const ArticleDetailView = () => {
         </section>
       )}
 
-      <Footer />
       <FloatingContact />
     </div>
   );

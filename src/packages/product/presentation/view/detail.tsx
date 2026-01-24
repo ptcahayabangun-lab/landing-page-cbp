@@ -1,7 +1,7 @@
 'use client'
 
 import { Image } from "@/components/atoms";
-import { ContactModal, FloatingContact, Footer, Navbar } from "@/components/templates";
+import { ContactModal, FloatingContact, Navbar } from "@/components/templates";
 import { motion } from "framer-motion";
 import { ArrowLeft, Check, Phone } from "lucide-react";
 import Link from "next/link";
@@ -50,7 +50,6 @@ export const ProductDetailView = () => {
             Kembali ke halaman produk
           </Link>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -267,7 +266,6 @@ export const ProductDetailView = () => {
         </div>
       </section>
 
-      <Footer />
       <FloatingContact />
       <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
     </div>
