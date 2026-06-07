@@ -95,11 +95,6 @@ export const ProductView = () => {
                       : ""
                   }`}
                 >
-                  {product.featured && (
-                    <span className="absolute -top-2 -right-2 px-2 py-1 bg-accent text-accent-foreground text-xs font-bold rounded-md">
-                      Unggulan
-                    </span>
-                  )}
                   <div
                     className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-colors ${
                       product.featured

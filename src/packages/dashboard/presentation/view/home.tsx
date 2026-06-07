@@ -18,7 +18,7 @@ export const HomeView = () => {
 
   return (
     <>
-      <section className="relative min-h-screen flex items-center pt-20 text-white">
+      <section className="relative h-screen flex items-center pt-16 text-white overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -33,7 +33,7 @@ export const HomeView = () => {
         </div>
 
         {/* Content */}
-        <div className="relative section-container py-20 lg:py-32">
+        <div className="relative section-container py-10 lg:py-12 mt-10">
           <div className="max-w-3xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

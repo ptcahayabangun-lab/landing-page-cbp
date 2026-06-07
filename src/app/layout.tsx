@@ -228,7 +228,7 @@ const RootLayout = ({
           precedence="default"
         />
       </head>
-      <body>
+      <body className="overflow-x-hidden">
         <StateProvider>{children}</StateProvider>
       </body>
     </html>

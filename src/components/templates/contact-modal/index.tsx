@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, MessageCircle, Phone, X } from "lucide-react";
@@ -11,16 +11,36 @@ interface ContactModalProps {
 
 export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   const [selectedNumber, setSelectedNumber] = useState<string | null>(null);
-  
+
   const phoneNumbers = [
-    { number: "0318075779", display: "(031) 807-5779", label: "Telepon Kantor", phoneOnly: true },
-    { number: "081357777867", display: "0813-5777-7867", label: "HP 1", phoneOnly: false },
-    { number: "085777772867", display: "0857-7777-2867", label: "HP 2", phoneOnly: false },
-    { number: "083197777867", display: "0831-9777-7867", label: "HP 3", phoneOnly: false },
+    {
+      number: "0318075779",
+      display: "(031) 807-5779",
+      label: "Telepon Kantor",
+      phoneOnly: true,
+    },
+    {
+      number: "081357777867",
+      display: "0813-5777-7867",
+      label: "HP 1",
+      phoneOnly: false,
+    },
+    {
+      number: "085777772867",
+      display: "0857-7777-2867",
+      label: "HP 2",
+      phoneOnly: false,
+    },
+    {
+      number: "083197777867",
+      display: "0831-9777-7867",
+      label: "HP 3",
+      phoneOnly: false,
+    },
   ];
 
   const whatsappMessage = encodeURIComponent(
-    "Halo PT Cahaya Bangun Perkasa, saya ingin bertanya mengenai produk material bangunan Anda."
+    "Halo PT Cahaya Bangun Perkasa, saya ingin bertanya mengenai produk material bangunan Anda.",
   );
 
   const handleClose = () => {
@@ -32,7 +52,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     setSelectedNumber(null);
   };
 
-  const selectedPhone = phoneNumbers.find(p => p.number === selectedNumber);
+  const selectedPhone = phoneNumbers.find((p) => p.number === selectedNumber);
 
   return (
     <AnimatePresence>
@@ -75,8 +95,8 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                 {selectedNumber ? "Pilih Metode Kontak" : "Hubungi Kami"}
               </h3>
               <p className="text-primary-foreground/80 text-sm mt-1 text-center">
-                {selectedNumber 
-                  ? `${selectedPhone?.display}` 
+                {selectedNumber
+                  ? `${selectedPhone?.display}`
                   : "Pilih nomor yang ingin Anda hubungi"}
               </p>
             </div>
@@ -99,7 +119,7 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                           if (phone.phoneOnly) {
                             window.location.href = `tel:${phone.number}`;
                           } else {
-                            setSelectedNumber(phone.number);
+                            setSelectedNumber(phone?.number?.slice(1));
                           }
                         }}
                         className="flex items-center gap-4 p-4 rounded-xl border-2 border-gray-300 hover:border-primary-default hover:bg-primary-default/5 transition-all group text-left cursor-pointer"
@@ -108,8 +128,12 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                           <Phone className="w-5 h-5 text-primary-default group-hover:text-white" />
                         </div>
                         <div className="flex-1">
-                          <p className="font-bold text-foreground">{phone.label}</p>
-                          <p className="text-muted-foreground text-sm">{phone.display}</p>
+                          <p className="font-bold text-foreground">
+                            {phone.label}
+                          </p>
+                          <p className="text-muted-foreground text-sm">
+                            {phone.display}
+                          </p>
                         </div>
                         {phone.phoneOnly && (
                           <span className="px-2 py-1 bg-gray-200 text-gray-darker text-xs font-medium rounded">
@@ -136,14 +160,18 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                         <Phone className="w-6 h-6 text-primary-default group-hover:text-white" />
                       </div>
                       <div className="flex-1">
-                        <p className="font-bold text-foreground">Telepon (Pulsa)</p>
-                        <p className="text-muted-foreground text-sm">Hubungi langsung via telepon</p>
+                        <p className="font-bold text-foreground">
+                          Telepon (Pulsa)
+                        </p>
+                        <p className="text-muted-foreground text-sm">
+                          Hubungi langsung via telepon
+                        </p>
                       </div>
                     </a>
 
                     {/* WhatsApp */}
                     <a
-                      href={`https://wa.me/62${selectedNumber.slice(1)}?text=${whatsappMessage}`}
+                      href={`https://wa.me/62${selectedNumber}?text=${whatsappMessage}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-4 p-4 rounded-xl border-2 border-gray-300 hover:border-success-default hover:bg-success-default/5 transition-all group"
@@ -152,8 +180,12 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                         <MessageCircle className="w-6 h-6 text-success-default group-hover:text-white" />
                       </div>
                       <div className="flex-1">
-                        <p className="font-bold text-foreground">Chat WhatsApp</p>
-                        <p className="text-muted-foreground text-sm">Respon lebih cepat</p>
+                        <p className="font-bold text-foreground">
+                          Chat WhatsApp
+                        </p>
+                        <p className="text-muted-foreground text-sm">
+                          Respon lebih cepat
+                        </p>
                       </div>
                       <span className="px-3 py-1 bg-success-default text-white text-xs font-semibold rounded-full">
                         Rekomendasi
@@ -169,4 +201,3 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     </AnimatePresence>
   );
 };
-
