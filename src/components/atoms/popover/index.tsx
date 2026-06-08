@@ -5,16 +5,15 @@ import {
   Popover as PopoverHUI,
   PopoverPanel,
 } from "@headlessui/react";
-import { AnchorProps } from "@headlessui/react/dist/internal/floating";
 import classNames from "clsx";
-import { ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 
 type PopoverProps = {
   trigger: ReactNode;
   children: ReactNode | ReactNode[];
   panelClassName?: string;
   itemClassName?: string;
-  position?: AnchorProps;
+  position?: ComponentProps<typeof PopoverPanel>["anchor"];
 };
 
 export const Popover = ({

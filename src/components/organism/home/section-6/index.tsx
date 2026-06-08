@@ -251,8 +251,8 @@ export const ContactUs = () => {
             >
               <SelectOption
                 name="sendTo"
-                control={control}
-                register={register}
+                control={control as any}
+                register={register as any}
                 useInsideLabel
                 required
                 errorMessage={errors?.sendTo?.message}
